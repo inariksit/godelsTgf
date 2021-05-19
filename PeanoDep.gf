@@ -24,8 +24,12 @@ abstract PeanoDep = {
     nS : Nat -> S scNat ;
     eS : (m,n : Nat) -> Eq m n -> S scEq ;
 
-    fun three : Nat ;
-    def three = Suc (Suc (Suc Zero)) ;
+
+    fun one, two, three : Nat ;
+  def
+    one = Suc Zero ;
+    two = Suc (Suc Zero) ;
+    three = Suc (Suc (Suc Zero)) ;
 
   fun
     unNS : S scNat -> Nat ;
@@ -69,9 +73,11 @@ abstract PeanoDep = {
   -- def
   --   ap a b f Refl = Refl ;
   fun
-    zeroRight1 : (p : Nat) -> Eq (Plus p Zero) p ;
+    zeroRight : (p : Nat) -> Eq (Plus p Zero) p ;
   def
-    zeroRight1 Zero = zeroLeft Zero ;
---    zeroRight1 (Suc n) = trans (Plus (Suc n) Zero) (Suc (Plus n Zero)) (Suc n) (plusSuc n Zero) (ap (Plus n) Zero (Suc) (zeroRight1 n)) ;
+    zeroRight (Suc n) = trans (Plus (Suc n) Zero) (Suc (Plus n Zero)) (Suc n) (plusSuc n Zero) (ap (Plus n Zero) n (Suc) (zeroRight n)) ;
+    zeroRight Zero = zeroLeft Zero ;
+
+  -- TODO: Define subst (and possibly J-rule)
 
 }
